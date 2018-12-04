@@ -1,42 +1,11 @@
-const data = require('./dev/data.js');
+const express = require('express');
+const routes = require('./routes');
 
-const ids = data.reduce((set, event) => {
-  set.add(event.purchaser);
-  event.recips.forEach(id => set.add(id));
-  return set;
-}, new Set());
-const ledger = {};
-ids.forEach(val => {
-  ledger[val] = {
-    payed: 0,
-    expenses: 0,
-    bought: [],
-    got: []
-  };
-});
+const app = express();
 
-data.forEach(payment => {
-  const { purchaser, description, amount, recips } = payment;
-  const user = ledger[purchaser];
+app.use('/', routes);
 
-  user.bought.push(description);
-  user.payed += amount;
-  recips.forEach(id => {
-    const recip = ledger[id];
-    recip.expenses += amount / recips.length;
-    recip.got.push(description);
-  });
-});
-
-console.log(ledger);
-
-const owes = Object.keys(ledger).filter(id => {
-  const { payed, expenses } = ledger[id];
-  return expenses > payed;
-});
-
-owes.forEach(id => {
-  const { payed, expenses } = ledger[id];
-  console.log(`User: ${id}`);
-  console.log(`Owes: $${expenses - payed}`);
+app.set('port', process.env.PORT || 3000);
+const server = app.listen(app.get('port'), () => {
+  console.log(`Express running ⇒  Port ${server.address().port}`);
 });
