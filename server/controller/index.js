@@ -8,7 +8,6 @@ const controller = {
     res.json(data);
   },
   async createPurchase(req, res) {
-    console.log(req.body);
     const { purchaser, amount, description, recipientIds } = req.body;
     const purchaseId = await db
       .insert({ purchaser, amount, description })
