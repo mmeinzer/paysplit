@@ -1,0 +1,6 @@
+{
+  "purchaserId": 1,
+  "amount": 21.5,
+  "description": "Chipotle bowl",
+  "recipientIds": [1, 2, 3]
+}

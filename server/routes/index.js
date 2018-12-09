@@ -2,8 +2,20 @@ const express = require('express');
 const controller = require('../controller');
 
 const router = express.Router();
-const { getPurchases } = controller;
+const {
+  getPurchases,
+  getAllUsers,
+  getAllPurchases,
+  createPurchase,
+  getPurchase
+} = controller;
 
-router.get('/', getPurchases);
+// GET
+router.get('/users', getAllUsers);
+router.get('/purchases', getAllPurchases);
+router.get('/purchase/:id', getPurchase);
+
+// POST
+router.post('/purchase', createPurchase);
 
 module.exports = router;
