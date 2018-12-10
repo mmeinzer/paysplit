@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Header = () => (
-  <div>
-    <h2>Pay Split</h2>
+  <div className="mx-auto max-w-lg">
+    <h1>Pay Split</h1>
   </div>
 );
 

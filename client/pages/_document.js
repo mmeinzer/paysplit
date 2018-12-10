@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
           />
           <style>{'#__next { height: 100vh; }'}</style>
         </Head>
-        <body className="h-full bg-grey-lightest">
+        <body className="h-full bg-grey-lighter">
           <Main />
           <NextScript />
         </body>
