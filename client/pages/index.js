@@ -1,6 +1,7 @@
 import React from 'react';
 // import Header from '../components/Header';
 import AddExpense from '../components/AddExpense';
+import fetch from 'isomorphic-unfetch';
 
 const Index = props => (
   <>
