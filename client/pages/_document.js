@@ -5,6 +5,7 @@ export default class MyDocument extends Document {
     return (
       <html className="h-full">
         <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link
             href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
             rel="stylesheet"
