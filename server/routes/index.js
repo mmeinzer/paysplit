@@ -3,7 +3,6 @@ const controller = require('../controller');
 
 const router = express.Router();
 const {
-  getPurchases,
   getAllUsers,
   getAllPurchases,
   createPurchase,

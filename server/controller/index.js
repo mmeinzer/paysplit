@@ -2,10 +2,12 @@ const db = require('../db');
 
 const controller = {
   async getAllPurchases(req, res) {
-    const data = await db
+    const dbData = await db
       .from('purchase')
       .innerJoin('recipient', 'purchase._id', 'recipient.purchase_id');
-    res.json(data);
+    // want purchase_id, description, amount, purchase, [person_id]
+    // dbData.reduce((data, item) => data, []);
+    res.json(dbData);
   },
   async createPurchase(req, res) {
     const { purchaser, amount, description, recipientIds } = req.body;
@@ -23,7 +25,6 @@ const controller = {
   },
   async getAllUsers(req, res) {
     const data = await db.from('person');
-    console.log(data);
     res.json(data);
   },
   async getPurchase(req, res) {
