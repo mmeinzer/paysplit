@@ -129,6 +129,7 @@ export default class extends React.Component {
             placeholder="Description"
             onFocus={this.onFocus}
             onChange={this.handleChange}
+            autoComplete="off"
           />
           <label htmlFor="amount" className={classes.label}>
             How much was it?
@@ -141,6 +142,7 @@ export default class extends React.Component {
             placeholder="Cost"
             onFocus={this.onFocus}
             onChange={this.handleChange}
+            autoComplete="off"
           />
           <label htmlFor="recipients" className={classes.label}>
             Who's it for?
@@ -152,6 +154,7 @@ export default class extends React.Component {
             placeholder="Recipient(s)"
             onFocus={this.onFocus}
             onChange={this.handleChange}
+            autoComplete="off"
           />
           <button className={classes.submit} type="submit">
             Add
