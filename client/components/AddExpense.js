@@ -32,7 +32,6 @@ export default class extends React.Component {
   };
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     const { amount, purchaser, description, recipients } = this.state;
     const recipientList = recipients
       .split(',')
@@ -44,7 +43,16 @@ export default class extends React.Component {
       description,
       recipients: recipientList
     };
-    console.log(postData);
+    fetch('http://localhost:4000/purchase', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postData)
+    });
   }
   handleChange(e) {
     if (e.target.type === 'number') {
