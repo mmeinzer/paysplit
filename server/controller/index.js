@@ -10,12 +10,15 @@ const controller = {
     res.json(dbData);
   },
   async createPurchase(req, res) {
-    const { purchaser, amount, description, recipientIds } = req.body;
+    const { purchaser, amount, description, recipients } = req.body;
+    const purchaserId = await db('person')
+      .where('handle', purchaser)
+      .select('_id');
     const purchaseId = await db
-      .insert({ purchaser, amount, description })
+      .insert({ purchaser: parseInt(purchaserId, 10), amount, description })
       .into('purchase')
       .then(ids => ids[0]);
-    recipientIds.map(async id => {
+    recipients.map(async id => {
       await db
         .insert({ person_id: id, purchase_id: purchaseId })
         .into('recipient')
