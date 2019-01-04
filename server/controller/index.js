@@ -5,8 +5,6 @@ const controller = {
     const dbData = await db
       .from('purchase')
       .innerJoin('recipient', 'purchase._id', 'recipient.purchase_id');
-    // want purchase_id, description, amount, purchase, [person_id]
-    // dbData.reduce((data, item) => data, []);
     res.json(dbData);
   },
   async createPurchase(req, res) {
