@@ -1,11 +1,41 @@
 const db = require('../db');
 
 const controller = {
-  async getAllPurchases(req, res) {
+  async getAllPurchases(_, res) {
     const dbData = await db
       .from('purchase')
       .innerJoin('recipient', 'purchase._id', 'recipient.purchase_id');
-    res.json(dbData);
+    const responseData = dbData.reduce(
+      (acc, item) => {
+        const { purchases, ids } = acc;
+        const {
+          _id,
+          amount,
+          description,
+          purchase_id,
+          purchaser,
+          person_id
+        } = item;
+        if (!ids.has(purchase_id)) {
+          item.recipientIds = [];
+          item.recipientIds.push(person_id);
+          delete item.person_id;
+          purchases.push({
+            purchaseId: purchase_id,
+            description,
+            amount,
+            purchaser,
+            recipientIds: item.recipientIds
+          });
+          ids.add(purchase_id);
+        } else {
+          purchases[purchases.length - 1].recipientIds.push(item.person_id);
+        }
+        return acc;
+      },
+      { purchases: [], ids: new Set() }
+    ).purchases;
+    res.json(responseData);
   },
   async createPurchase(req, res) {
     const { purchaser, amount, description, recipients } = req.body;
